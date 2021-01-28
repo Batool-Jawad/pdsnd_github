@@ -216,6 +216,7 @@ def user_stats(df):
 
 
 def display_raw_data(df):
+    """Displays raw data based on the user's request."""
     #intilize row_counter with zero
     row_count = 0
     while True:
