@@ -217,10 +217,9 @@ def display_raw_data(df):
         display = input('Disply 5 rows of data ? Enter yes or no ')
         #if the user wants to see the data
         if display.lower() == 'yes':
-            #increment row_count by 5
-            row_count += 5
             #display raw data
-            print(df.head(row_count))
+            print(df.iloc[row_count:row_count+5])
+            row_count += 5
         #if the user does not want to see raw data anymore, exit while loop
         else:
             break
