@@ -75,7 +75,7 @@ def load_data(city, month, day):
 
     # extract month,day of week and hour from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
-    df['day_of_week'] = df['Start Time'].dt.weekday_name
+    df['Day of Week'] = df['Start Time'].dt.weekday_name
 
 
     # filter by month if applicable
@@ -89,7 +89,7 @@ def load_data(city, month, day):
     # filter by day of week if applicable
     if day != 'all':
         # filter by day of week to create the new dataframe
-        df = df[df['day_of_week'] == day.title()]
+        df = df[df['Day of Week'] == day.title()]
 
     return df
 
@@ -118,7 +118,7 @@ def time_stats(df,month,day):
     #if data is not filtred by a single day of week
     if day == 'all':
         #getting the common day of week using mode method
-        common_day_of_week = df['day_of_week'].mode()[0]
+        common_day_of_week = df['Day of Week'].mode()[0]
         print('The most common day of week is: {}'.format(common_day_of_week))
 
     # TO DO: display the most common start hour
@@ -151,8 +151,8 @@ def station_stats(df):
 
     # TO DO: display most frequent combination of start station and end station trip
     #getting the most frequent combination of start station and end station trip
-    common_start_end_combination = df.groupby(['Start Station','End Station']).size().idxmax()
-    print('The most frequent combination of start station and end station trip is: {}'.format(common_start_end_combination))
+    frequent_stations_combination = df.groupby(['Start Station','End Station']).size().idxmax()
+    print('The most frequent combination of start station and end station trip is: {}'.format(frequent_stations_combination))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -224,10 +224,9 @@ def display_raw_data(df):
         display = input('Disply 5 rows of data ? Enter yes or no ')
         #if the user wants to see the data
         if display.lower() == 'yes':
-            #increment row_count by 5
-            row_count += 5
             #display raw data
-            print(df.head(row_count))
+            print(df.iloc[row_count:row_count+5])
+            row_count += 5
         #if the user does not want to see raw data anymore, exit while loop
         else:
             break
