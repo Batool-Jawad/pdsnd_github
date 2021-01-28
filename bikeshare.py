@@ -75,7 +75,7 @@ def load_data(city, month, day):
 
     # extract month,day of week and hour from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
-    df['day_of_week'] = df['Start Time'].dt.weekday_name
+    df['Day of Week'] = df['Start Time'].dt.weekday_name
 
 
     # filter by month if applicable
@@ -89,7 +89,7 @@ def load_data(city, month, day):
     # filter by day of week if applicable
     if day != 'all':
         # filter by day of week to create the new dataframe
-        df = df[df['day_of_week'] == day.title()]
+        df = df[df['Day of Week'] == day.title()]
 
     return df
 
@@ -112,7 +112,7 @@ def time_stats(df,month,day):
     #if data is not filtred by a single day of week
     if day == 'all':
         #getting the common day of week using mode method
-        common_day_of_week = df['day_of_week'].mode()[0]
+        common_day_of_week = df['Day of Week'].mode()[0]
         print('The most common day of week is: {}'.format(common_day_of_week))
 
     # TO DO: display the most common start hour
